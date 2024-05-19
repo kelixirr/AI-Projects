@@ -10,3 +10,4 @@ This repo is divided into two parts:
 I will keep adding more projects as I continue to build them. 
 
 Feel Free to Check Them Out! 
+Visit my Kaggle profile to learn more.    
