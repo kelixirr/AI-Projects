@@ -31,3 +31,4 @@ This repo is divided into two parts:
 8. [Spaceship Accident - Predict Alternate Dimension Travellers](https://github.com/kelixirr/AI-Projects/blob/main/Machine%20Learning%20Projects%20(Classic)/spaceship-titanic-end-to-end.ipynb)
 
 
+more coming soon...
