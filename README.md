@@ -1,6 +1,6 @@
 # AI-Projects
 
-All projects in this repo are related to the Artificial Intelligence Field.
+All of my projects in this repo are related to the Artificial Intelligence Field.
 This repo is divided into two parts: 
 
 ## Deep Learning Projects
