@@ -1,7 +1,7 @@
 ## Implementation of DenseNet-BC/B/C on CIFAR-10 Dataset
-#### Introduction
+### Introduction
 This project involves the implementation of the DenseNet architecture to classify images from the CIFAR-10 dataset. The CIFAR-10 dataset consists of 60,000 32x32 color images in 10 different classes, with 6,000 images per class. The dataset is divided into 50,000 training images and 10,000 test images. DenseNet, or Dense Convolutional Network, is a type of convolutional neural network where each layer within a dense block is connected to every other layer in a feed-forward fashion. 
-#### Dataset Preparation
+### Dataset Preparation
 The CIFAR-10 dataset was loaded using Keras' built-in functionality. The dataset was then split into training, validation, and test sets, with the training set further split to create a validation set based on the paper description: 
 
 ```Python
@@ -26,14 +26,18 @@ y_test = to_categorical(y_test, num_classes)
 ```
 
 A few normalization steps are taken from the paper and data was prepared without data augementation (using dropout as suggested).  Data was normalized using the channel means and standard deviations, along with pushing the pixel values between 0 and 1.  The labels were one-hot encoded. 
-#### Description of DenseNet Components with Reference to the Original Paper
+### Description of DenseNet Components with Reference to the Original Paper
 The DenseNet (Dense Convolutional Network) architecture connects each layer to every other layer in a feed-forward fashion. DenseNet was introduced in the paper ["Densely Connected Convolutional Networks"](https://arxiv.org/abs/1608.06993) by Gao Huang, Zhuang Liu, Laurens van der Maaten, and Kilian Q. Weinberger. This connectivity pattern ensures maximum information flow between layers and mitigates the vanishing gradient problem, enabling the creation of very deep networks. Below is my detailed explanation of the key components of DenseNet as implemented in the provided code. 
-##### Architecture Design: 
+#### Architecture Design: 
 - **Input Layer**: This is where the network first receives the input data, such as images. It prepares the data for processing through subsequent layers.
 - **Dense Blocks**: DenseNet is structured around dense blocks, each containing multiple layers. In these blocks, each layer receives feature maps from all preceding layers as input. This dense connectivity enhances feature reuse and promotes strong gradient flow during training.
 - **Transition Layers**: Positioned between dense blocks, transition layers serve two main purposes. They reduce the spatial dimensions of feature maps through operations like batch normalization, 1×1 convolutions, and average pooling. They also adjust the number of feature maps, controlling model complexity while maintaining information richness.
-- **Classifier**: At the end of DenseNet, a global average pooling layer aggregates spatial information from the feature maps into a single vector. This vector is then fed into a classifier, typically a dense layer with softmax activation for classification tasks, which outputs probabilities for different classes.
-##### Input Layer
+- **Classifier**: At the end of DenseNet, a global average pooling layer aggregates spatial information from the feature maps into a single vector. This vector is then fed into a classifier, a dense layer with softmax activation for classification tasks, which outputs probabilities for different classes.
+
+![DenseNet Architecture](https://github.com/kelixirr/AI-Projects/blob/main/Deep%20Learning%20Projects/DenseNet/DenseNet.PNG)
+*DenseNet Architecture*
+  
+#### Input Layer
 
 ```Python
 def input_layer(input_shape, bottleneck=True, compression=True, k=12):
@@ -54,7 +58,7 @@ def input_layer(input_shape, bottleneck=True, compression=True, k=12):
 - **Convolution**:
     - **Bottleneck and Compression**: If both are enabled, a convolutional layer with `2 * k` filters is applied. This is consistent with the DenseNet paper, where bottleneck layers (1x1 convolutions) are used to reduce the number of input feature maps.
     - **Without Bottleneck or Compression**: Applies a standard convolutional layer with 16 filters.
-##### Dense Unit
+#### Dense Unit
 ```Python
 def dense_unit(x, k, bottleneck=True, data_augmentation=True, dropout_rate=0.2):
     if bottleneck:
@@ -85,7 +89,7 @@ def dense_unit(x, k, bottleneck=True, data_augmentation=True, dropout_rate=0.2):
     - **3x3 Convolution**: Applies the main convolution with `k` filters.
     - **Dropout**: Optionally applies dropout.
 - **Concatenation**: Concatenates the input `x` with the output `y` to maintain dense connectivity.
-###### Why Bottleneck Layers?
+##### Why Bottleneck Layers?
 
 The concept of bottleneck layers in DenseNet is crucial for improving computational efficiency. 
 - **Purpose**: Bottleneck layers are introduced to reduce the number of input feature maps before a convolution operation. This reduction helps in decreasing the computational cost without significantly impacting the model's performance.
@@ -93,7 +97,7 @@ The concept of bottleneck layers in DenseNet is crucial for improving computatio
 - **DenseNet-B**: When the DenseNet model includes bottleneck layers, it is referred to as DenseNet-B. In this variant, each 1×1 convolution produces `4k` feature maps, where `k` is the growth rate. The sequence of operations in a DenseNet-B layer is BN (Batch Normalization) -> ReLU -> Conv(1×1) -> BN -> ReLU -> Conv(3×3).
 
 >*a 1×1 convolution can be introduced as bottleneck layer before each 3×3 convolution to reduce the number of input feature-maps, and thus to improve computational efficiency. We find this design especially effective for DenseNet and we refer to our network with such a bottleneck layer, i.e., to the BN-ReLU-Conv(1× 1)-BN-ReLU-Conv(3×3) as DenseNet-B. In our experiments, we let each 1×1 convolution produce 4k feature-maps.* *- DenseNet paper*
-##### Dense  Block
+#### Dense  Block
 ```Python
 def dense_block(x, k, num_layers, bottleneck=True, data_augmentation=True, dropout_rate=0.2):
     for _ in range(num_layers):
@@ -127,7 +131,7 @@ def transition_layers(x, compression=True, compression_factor=0.5, data_augmenta
 - **1x1 Convolution**: Adjusts the number of filters.
 - **Dropout**: Optionally applies dropout.
 - **Average Pooling**: Reduces the spatial dimensions of the feature maps, downsampling the resolution. 
-###### What Is Compression?
+##### What Is Compression?
 
 Compression is another technique used in DenseNet to improve model compactness and efficiency.
 
@@ -138,7 +142,7 @@ Compression is another technique used in DenseNet to improve model compactness a
 > *We refer the DenseNet with θ <1 as DenseNet-C, and we set θ = 0.5 in our experiment. When both the bottleneck and transition layers with θ < 1 are used, we refer to our model as DenseNet-BC. When θ = 1, the number of feature-maps across transition layers remains unchanged.* *
 > *- DenseNet paper*
 
-#### Implementation Details Of `DenseNet` Function
+### Implementation Details Of `DenseNet` Function
 - **Configuration**:
     - **Number of Blocks**: DenseNet typically consists of three dense blocks.
     - **Layers per Block**: For a model with depth `L` and `B` blocks, each block contains `(L - 4) / (2 * B)` layers.
@@ -151,7 +155,7 @@ Compression is another technique used in DenseNet to improve model compactness a
     - **Transition Layers**: Between dense blocks, 1x1 convolution and 2x2 average pooling are used to downsample the feature maps.
     - **Global Average Pooling**: Applied at the end of the last dense block.
     - **Softmax Classifier**: Produces the final class predictions.
-#### Training the Model
+### Training the Model
 The model was trained using a learning rate schedule and callbacks for checkpointing, learning rate reduction, and learning rate scheduling. Training took place according to the original paper without any data augmentation or with dropout set to 0.2. : 
 
 ```Python
@@ -160,12 +164,14 @@ epochs = 300
 model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.SGD(learning_rate= 1e-1, momentum=0.9, nesterov=True, weight_decay=1e-4), metrics=['acc'])
 ```
 
-#### Model Evaluation
+### Model Evaluation
 **Due to limitations in Google Colab's GPU resources**, the session had to be terminated. However, the best model checkpoint was saved and later evaluated on the test dataset, achieving the following results:
 ##### Results
 - **Test loss**: 0.5097
 - **Test accuracy**: 85.72%
 - **Error rate**: 14.28%
-#### Outcome
+### Outcome
 The implementation of DenseNet on the CIFAR-10 dataset demonstrated the effectiveness of the architecture in achieving a high accuracy on image classification tasks. Despite the constraints of the computing environment, the use of model checkpointing ensured that the best model was saved and could be evaluated accurately. The final model achieved an impressive test accuracy of 85.72%, with an error rate of 14.28% even at epoch 25 out of 300 which shows it would improve further. 
 
+### Suggestions? 
+Do you have any feedback or suggestions, do let me know. 
