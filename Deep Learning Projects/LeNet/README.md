@@ -27,7 +27,7 @@ This project implements a convolutional neural network (CNN) called LeNet-5 to c
 
 - **Model Compilation**:
   - Optimizer: Adam optimizer.
-  - Loss Function: Sparse categorical cross-entropy.
+  - Loss Function: categorical cross-entropy.
   - Metric: Accuracy.
 
 - **Training Setup**:
@@ -43,7 +43,7 @@ This project implements a convolutional neural network (CNN) called LeNet-5 to c
 
 - The implementation deviates in:
   - Connection scheme after the first downsampling layer. The original model used a non-complete connection scheme after the first downsampling layer, which is not implemented here.
-  - The final layer in the original architecture employed a radial basis function (RBF) activation and a different loss function. This project uses softmax activation and sparse categorical cross-entropy loss.
+  - The final layer in the original architecture employed a radial basis function (RBF) activation and a different loss function (MAP-based). This project uses softmax activation and  categorical cross-entropy loss.
 
 ### Conclusion
 
