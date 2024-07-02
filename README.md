@@ -1,4 +1,4 @@
-# AI-Projects
+# AI-Projects - My Portfolio 
 
 All of my projects in this repo are related to the Artificial Intelligence Field.
 
