@@ -78,3 +78,10 @@ decoder = Model(latent_inputs, outputs, name="decoder")
 decoder.summary()
 plot_model(decoder, show_shapes=True)
 ```
+## Code Explanation In Denoising_Autoencoders.ipynb
+Denoising Autoencoders take the above concept a step further by adding noise to the input data and training the model to remove this noise. This helps in learning more robust features and representations. 
+1. **Structure:** Noisy Input: A noisy version of the input data is fed into the encoder. Encoder: The encoder compresses this noisy input into a latent representation. Decoder: The decoder reconstructs the clean, original input from this noisy latent representation.
+2. **Objective:** The goal is to minimize the difference between the clean original input and the reconstructed output. This encourages the model to learn to denoise the input.
+3. **Steps to Train a Denoising Autoencoder:** Add Noise: Add some form of noise (e.g., Gaussian noise) to the original data. For example, if you have an image dataset, you can add random pixel noise to create a noisy version of the images. Model Training: Train the autoencoder on pairs of noisy and clean data. The input to the encoder is the noisy data, and the target output for the decoder is the clean data. Loss Function: Use a loss function that measures the reconstruction error, such as Mean Squared Error (MSE) between the clean data and the reconstructed output.
+
+In the code, we have done the same thing on MNIST Daatset. 
