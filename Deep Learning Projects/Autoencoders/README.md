@@ -1,6 +1,6 @@
 ## Autoencoders
 
-A full tutorial on Autoencoders can be found here on my website. (Autoencoders In Depth)[https://neuraldemy.com/autoencoders-fundamentals-of-encoders-and-decoders/#denoising-autoencoders]
+A full tutorial on Autoencoders can be found here on my website. [Autoencoders In Depth](https://neuraldemy.com/autoencoders-fundamentals-of-encoders-and-decoders/#denoising-autoencoders)
 
 Autoencoders are a type of artificial neural network used for unsupervised learning of efficient codings. They are designed to learn a compressed representation (encoding) of input data, and subsequently, to reconstruct the original input from this encoding. This process forces the network to capture the most important features of the data.
 
