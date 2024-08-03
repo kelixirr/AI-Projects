@@ -21,6 +21,10 @@ All of my projects in this repo are related to the Artificial Intelligence Field
 15. [Denoising Autoencoders On MNIST dataset](https://github.com/kelixirr/AI-Projects/blob/main/Deep%20Learning%20Projects/Autoencoders/Denoising_Autoencoders.ipynb)
 16. [Colorization using Autoencoders on CIFAR10 dataset](https://github.com/kelixirr/AI-Projects/blob/main/Deep%20Learning%20Projects/Autoencoders/Colorization_Using_Autoencoders.ipynb)
 17. [Implementation of Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks, a paper by Alec Radford, Luke Metz, and Soumith Chintala](https://github.com/kelixirr/AI-Projects/blob/main/Deep%20Learning%20Projects/Generative%20Adversarial%20Networks/DEEP_CONVOLUTIONAL_GENERATIVE_ADVERSARIAL_NETWORKS.ipynb)
+18. [Implementation Of Info GAN](https://github.com/kelixirr/AI-Projects/blob/main/Deep%20Learning%20Projects/Generative%20Adversarial%20Networks/InfoGAN.ipynb)
+19. [Implementation of Least Squares GAN](https://github.com/kelixirr/AI-Projects/blob/main/Deep%20Learning%20Projects/Generative%20Adversarial%20Networks/Least_squares_GAN.ipynb)
+20. [Implementation of Wassertein GAN](https://github.com/kelixirr/AI-Projects/blob/main/Deep%20Learning%20Projects/Generative%20Adversarial%20Networks/Wasserstein_GAN.ipynb)
+21. 
 
 #### Big Projects
 1. [Arxiv34k4l - Multi-label Text Classification Project](https://github.com/kelixirr/Arxiv34k4l/tree/main): Arxiv34k4l is a project aimed at building a multi-label text classification model using natural language processing (NLP) techniques. The project utilizes data sourced from the ArXiv database, which contains a vast collection of academic papers spanning various disciplines. The project's main objective was to develop a model capable of effectively classifying academic papers into multiple categories simultaneously based on their abstracts reducing the workload of human reviewers who are often involved, and automating the process.
