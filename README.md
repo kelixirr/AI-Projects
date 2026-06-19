@@ -1,6 +1,6 @@
-# AI-Projects - My Portfolio 
+# AI Projects - My Portfolio 
 
-All of my projects in this repo are related to the Artificial Intelligence Field.
+AI Projects for beginners learning Artificial Intelligence, Machine Learning, Data Science And Deep Learning
 
 ## Deep Learning Projects
 
